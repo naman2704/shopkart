@@ -1,0 +1,23 @@
+#shopkart_main_header {
+    background: #696666ed;
+}
+
+/* #shopkart_main_header h1 {
+    font-style: italic;
+    letter-spacing: 0.05em;
+    color: #5623ea;
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to right, #5623ea, #d68174);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    margin: 0;
+    padding: 15px 0;
+} */
+#shopkart_main_header h1 {
+    margin: 0;
+    padding: 15px 0;
+    color: white;
+    font-style: italic;
+    font-size: 40px;
+}

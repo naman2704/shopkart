@@ -1,0 +1,16 @@
+footer {
+    background: #474343;
+}
+
+#sponsors h3 {
+    margin: 0;
+    font-size: 30px;
+    font-family: sans-serif;
+    color: whitesmoke;
+    background: linear-gradient(to right, #f19a18, #a6b123, #073380);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+#sponsors #links a:hover {
+    opacity: 0.8;
+}
