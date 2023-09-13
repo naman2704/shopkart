@@ -13,8 +13,8 @@ export default function Footer() {
                         <img 
                             src={amazon} 
                             alt="amazon logo" 
-                            width={"300px"} 
-                            height={"150px"}
+                            width={"200px"} 
+                            height={"100px"}
                         />
                     </a>
                     <a href="https://www.flipkart.com/" target="_blank" rel="noreferrer">
@@ -29,8 +29,8 @@ export default function Footer() {
                         <img 
                             src={wallmart} 
                             alt="wallmart logo" 
-                            width={"300px"} 
-                            height={"150px"}
+                            width={"150px"} 
+                            height={"50px"}
                         />
                     </a>
                 </span>
