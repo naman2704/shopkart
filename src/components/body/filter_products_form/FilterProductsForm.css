@@ -33,18 +33,20 @@
     height: 100vh;
     min-height: 100vh;
     padding: 5px;
-    background-image: url('../img/formBG1.avif');
+    background-image: url('../img/formBG3.avif');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
     background-size: cover;        
     transition: background-image 1s;
+    display: flex;
+    flex-direction: column;
 }
 
 #filter_products_form {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 30%;
 }
   
 .form-control::placeholder {
@@ -56,10 +58,7 @@
     border: 2px solid #474343 !important;
     border-radius: 30px !important;
     width: 75%;
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: auto;
 }
 #search_bar {
     background-color: transparent !important;
@@ -68,11 +67,13 @@
 #body .other_filters {
     background: #f5f5f547;
     width: 70%;
-    position: absolute;
-    top: 110px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: auto;
     border-radius: 5px;
+}
+
+#filter_products_form, #body .search_form, #body .other_filters {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #body .filter {
