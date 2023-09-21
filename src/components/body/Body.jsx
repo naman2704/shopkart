@@ -1,15 +1,21 @@
-import FilterProductsForm from "./filter_products_form/FilterProductsForm";
+import { PRODUCT_DATA } from './DummyData';
+
 import Header from '../body/header/Header';
-import { useState, useEffect } from "react";
-import bg1 from '../body/img/formBG1.avif';
+import FilterProductsForm from "./filter_products_form/FilterProductsForm";
+import ProductList from '../body/product_list/ProductList';
+
+/* import { useState, useEffect } from "react"; */
+
+/* import bg1 from '../body/img/formBG1.avif';
 import bg2 from '../body/img/formBG2.avif';
 import bg3 from '../body/img/formBG3.avif';
 import bg4 from '../body/img/formBG4.avif';
-const images = [bg1, bg2, bg3, bg4];
+const images = [bg1, bg2, bg3, bg4]; */
 
 export default function Body() {
-    const [index, setIndex] = useState(1);
+    /* const [index, setIndex] = useState(1);
     useEffect(() => {
+        console.log('PRODUCT_DATA: ', PRODUCT_DATA);
         const updateImageInterval = setInterval(() => {
             const element = document.querySelector('div#body');
             element.style.backgroundImage = `url('${images[index]}')`;
@@ -17,11 +23,12 @@ export default function Body() {
             else setIndex(index + 1);
         }, 2000);
         return () => clearInterval(updateImageInterval);
-    }, [index]);
+    }, [index]); */
     return (
         <div id="body">
             <Header websiteName="shopkart"/>
             <FilterProductsForm />
+            <ProductList products={PRODUCT_DATA.products}/>
         </div>
     );
 }
