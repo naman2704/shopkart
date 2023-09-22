@@ -46,7 +46,7 @@
 #filter_products_form {
     position: relative;
     width: 100%;
-    height: 30%;
+    height: fit-content;
 }
   
 .form-control::placeholder {

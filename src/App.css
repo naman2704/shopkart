@@ -12,3 +12,30 @@
   height: 100%;
   min-height: 100%;
 }
+
+body .dnone {
+  display: none !important;
+}
+.button_list {
+  width: fit-content;
+  box-sizing: border-box;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.button_list>div {
+  width: fit-content;
+  display: inline-block;
+  margin: 5px;
+}
+
+.button_list .btn {
+  font-size: 18px;
+}
+
+.button_list .btn-txt {
+  margin-right: 5px;
+}
+.btn-svg {
+  display: inline-block;
+}
