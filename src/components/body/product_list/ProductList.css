@@ -30,7 +30,7 @@
     stroke: red;
 }
 
-#product_list .products>.card[bookmarked] .bookmark_btn svg #SVGRepo_iconCarrier path {
+#product_list .products>.card[bookmarked='true'] .bookmark_btn svg #SVGRepo_iconCarrier path {
     fill: red;
 }
 
