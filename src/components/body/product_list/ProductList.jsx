@@ -1,39 +1,13 @@
 import './ProductList.css';
-import {  useEffect } from "react";
 import ruppeeSvg from '../img/ruppee.svg';
 
-export default function ProductList({ products }) {
+export default function ProductList({ products, bookmarkList, bookmarkClickHandler }) {
     const categoryList = [];
     Object.values(products).forEach(product => {
         const category = product.category.toLowerCase().trim();
         if (!categoryList.includes(category))
             categoryList.push(category);
     });
-    let bookmarkList = 
-        typeof localStorage.getItem('bookmarkedProducts') === 'undefined' || 
-        localStorage.getItem('bookmarkedProducts') === null ? []: JSON.parse(localStorage.getItem('bookmarkedProducts'));
-    console.log("bookmarkList: ", bookmarkList);
-    useEffect(() => {
-        // console.log('products2704: ', categoryList);
-        // console.log(products)
-        console.log(bookmarkList)
-    }, [bookmarkList]);
-    const bookmarkClickHandler = (event) => {
-        const productId = event.target.closest('.card').getAttribute('product_id');
-        if (productId && typeof productId === "string") {
-            console.log("Type of bookmarkList: ", typeof bookmarkList);
-            if (bookmarkList.includes(productId)) {
-                console.log(typeof bookmarkList);
-                bookmarkList.splice(bookmarkList.indexOf(productId), 1);
-                event.target.closest('.card').setAttribute('bookmarked', 'false');
-            } else {
-                bookmarkList.push(productId);
-                event.target.closest('.card').setAttribute('bookmarked', 'true');
-            }
-            console.log("bookmarkList: ", bookmarkList);
-            localStorage.setItem('bookmarkedProducts', JSON.stringify(bookmarkList));
-        } 
-    }
     return (
         <div id="product_list">
             <div id="category_filter">
