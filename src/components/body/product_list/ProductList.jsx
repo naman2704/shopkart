@@ -1,20 +1,14 @@
 import './ProductList.css';
 import ruppeeSvg from '../img/ruppee.svg';
 
-export default function ProductList({ products, bookmarkList, bookmarkClickHandler }) {
-    const categoryList = [];
-    Object.values(products).forEach(product => {
-        const category = product.category.toLowerCase().trim();
-        if (!categoryList.includes(category))
-            categoryList.push(category);
-    });
+export default function ProductList({ products, bookmarkList, categoryList, bookmarkClickHandler, categoryClickHandler }) {
     return (
         <div id="product_list">
             <div id="category_filter">
                 <ul className="category_filter_list">
-                    <li className="btn btn-secondary" active="true">All</li>
+                    <li className="btn btn-light" key="all" data-category="all" active="true" onClick={categoryClickHandler}>All</li>
                     {categoryList.map(category => {
-                        return <li className="btn btn-light" data-category={category}>{category}</li>
+                        return <li className="btn btn-light" key={category} data-category={category} active="false" onClick={categoryClickHandler}>{category}</li>
                     })}
                 </ul>
             </div>
@@ -23,17 +17,21 @@ export default function ProductList({ products, bookmarkList, bookmarkClickHandl
                     products.map(product => {
                         const ratingPercentage = ((product.rating/5) * 100).toFixed(2);
                         const orignalPrice = Number.parseInt((product.price * 100)/(100 - product.discountPercentage));
-                        const bookmarked = bookmarkList.includes(product.id.toString())? "true": "false";
-                        console.log("Bookmarked: ", bookmarked);
+                        const bookmarked = bookmarkList?.includes(product?.id?.toString())? "true" : "false";
                         return (
-                            <div className="card" product_id={product.id} bookmarked={bookmarked}>
+                            <div 
+                                className="card" 
+                                key={product.id} 
+                                product_id={product.id} 
+                                bookmarked={bookmarked}
+                            >
                             <div className="product_thumbnail">
                                 <img className="card-img-top" src={product.thumbnail} alt="Card cap" />
                             </div>
                             <div className="card-body">
                                 <button className="btn bookmark_btn" onClick={bookmarkClickHandler}>
                                     <div className="btn_svg">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none" stroke="#1a1a1aa8" strokeWidth="2">
                                             <g id="SVGRepo_bgCarrier" strokeWidth="0"/>
                                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"/>
                                             <g id="SVGRepo_iconCarrier"> 

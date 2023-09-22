@@ -20,8 +20,8 @@ export default function FilterProductsForm() {
             <div className="other_filters clearfix">
                 <div className="filter price_range_form">
                     <label htmlFor="select_price_range">Price range:</label>
-                    <select className="form-select" aria-label="Default select example" id="select_price_range">
-                        <option value="all" defaultValue={"all"}>{"All"}</option>
+                    <select className="form-select" aria-label="Default select example" id="select_price_range" defaultValue={'all'}>
+                        <option value="all">{"All"}</option>
                         <option value="lessorequal500">{"0 - 500"}</option>
                         <option value="lessorequal1000">{"501 - 1000"}</option>
                         <option value="lessorequal1500">{"1001 - 1500"}</option>
@@ -32,8 +32,8 @@ export default function FilterProductsForm() {
                 </div>
                 <div className="filter select_rating_form">
                     <label htmlFor="select_rating_form">Rating:</label>
-                    <select className="form-select" aria-label="Default select example" id="select_rating_form">
-                        <option value="all" selected>{"All"}</option>
+                    <select className="form-select" aria-label="Default select example" id="select_rating_form" defaultValue={'all'}>
+                        <option value="all">{"All"}</option>
                         <option value="lessorequal1">{"0 - 1"}</option>
                         <option value="lessorequal2">{"1 - 2"}</option>
                         <option value="lessorequal3">{"2 - 3"}</option>
