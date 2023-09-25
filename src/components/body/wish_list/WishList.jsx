@@ -1,7 +1,16 @@
 export default function WishList({ products, bookmarkList }) {
     return (
-        <div id="wish_list_container">
-            <button className="btn btn-warning show_wish_list_item" data-target="widh_list">
+        <div id="wish_list_container popup_container">
+            <button 
+                className="btn btn-warning show_wish_list_item popup_btn" 
+                data-target="widh_list"
+                onClick={(e) => {
+                    const popup = e.target.closest('.popup_container')/* .querySelector('.popup') */;
+                    console.log("Popup: ", popup);
+                    /* if (popup.classList.contains('dnone')) popup.classList.remove('dnone');
+                    else popup.classList.add('dnone'); */
+                }}
+            >
                 <span className="btn-txt">Wish List</span>
                 <div className="btn-svg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" viewBox="0 0 24 24" fill="none" stroke="red" strokeWidth="2">
@@ -14,7 +23,7 @@ export default function WishList({ products, bookmarkList }) {
                     </svg>
                 </div>
             </button>
-            <ul id="widh_list" className="dnone">
+            <ul id="widh_list" className="dnone popup">
                 {
                   products && products.length > 0 && bookmarkList && bookmarkList.length > 0 && products.filter((product) => {
                         return bookmarkList.includes(product.id.toString());

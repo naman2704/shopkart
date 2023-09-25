@@ -62,9 +62,6 @@ export default function Body() {
             }
         }
     }
-    /* useEffect(() => {
-        console.log("Bookmarklist1234: ", bookmarkList)
-    }, [bookmarkList]); */
     /* const [index, setIndex] = useState(1);
     useEffect(() => {
         console.log('PRODUCT_DATA: ', PRODUCT_DATA);
