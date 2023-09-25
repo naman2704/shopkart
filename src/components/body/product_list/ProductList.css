@@ -27,9 +27,9 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: center;
     max-height: 650px;
-    width: fit-content;
+    width: 1400px;
+    margin: 0 auto;
     overflow: hidden auto;
     scrollbar-color: rgb(2, 105, 248);
 }

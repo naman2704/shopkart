@@ -1,7 +1,15 @@
 export default function Cart() {
     return (
-        <div id="cart_container">
-            <button className="btn btn-secondary show_cart_items" data-target="cart">
+        <div id="cart_container popup_container">
+            <button 
+                className="btn btn-secondary show_cart_items popup_btn" 
+                data-target="cart"
+                onClick={(e) => {
+                    const popup = e.target.closest('.popup_container').querySelector('popup');
+                    if (popup.classList.contains('dnone')) popup.classList.remove('dnone');
+                    else popup.classList.add('dnone');
+                }}
+            >
                 <span className="btn-txt">Cart</span>
                 <div className="btn-svg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 -0.5 32 32" fill="none">
@@ -26,7 +34,7 @@ export default function Cart() {
                     </svg>
                 </div>
             </button>
-            <ul id="cart" className="dnone">
+            <ul id="cart" className="dnone popup">
                 <p>Your cart is empty</p>
             </ul>
         </div>
