@@ -1,11 +1,14 @@
+import './Cart.css';
+
 export default function Cart() {
     return (
-        <div id="cart_container popup_container">
+        <div id="cart_container" className="popup_container">
             <button 
                 className="btn btn-secondary show_cart_items popup_btn" 
                 data-target="cart"
                 onClick={(e) => {
-                    const popup = e.target.closest('.popup_container').querySelector('popup');
+                    document.querySelector('#wish_list_container .popup').classList.add('dnone');
+                    const popup = e.target.closest('.popup_container').querySelector('.popup');
                     if (popup.classList.contains('dnone')) popup.classList.remove('dnone');
                     else popup.classList.add('dnone');
                 }}

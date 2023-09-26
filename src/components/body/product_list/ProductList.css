@@ -54,11 +54,11 @@
     border-radius: 0;
 }
 
-#product_list .products>.card[bookmarked='true'] .bookmark_btn svg{
+#product_list .products>.card[bookmarked = 'true'] .bookmark_btn svg{
     stroke: red;
 }
 
-#product_list .products>.card[bookmarked='true'] .bookmark_btn svg #SVGRepo_iconCarrier path {
+#product_list .products>.card[bookmarked = 'true'] .bookmark_btn svg #SVGRepo_iconCarrier path {
     fill: red;
 }
 
@@ -155,13 +155,13 @@
     text-decoration: line-through;
     line-height: 0;
 }
-.card-body .product_stock{
+.product_list .card-body .product_stock{
     width: fit-content;
     position: absolute;
     bottom: 5px;
 }
 
-.card-body .product_stock .title{
+.product_list .card-body .product_stock .title{
     font-weight: 500;
     font-size: 18px;
     margin-right: 3px;
@@ -169,7 +169,7 @@
 
 .bookmark_btn {
     position: absolute;
-    right: 0px;
+    right: 0;
     top: 0;
 }
 
