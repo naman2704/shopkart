@@ -1,14 +1,16 @@
+import './WishList.css';
+
 export default function WishList({ products, bookmarkList }) {
     return (
-        <div id="wish_list_container popup_container">
+        <div id="wish_list_container" className="popup_container">
             <button 
                 className="btn btn-warning show_wish_list_item popup_btn" 
                 data-target="widh_list"
                 onClick={(e) => {
-                    const popup = e.target.closest('.popup_container')/* .querySelector('.popup') */;
-                    console.log("Popup: ", popup);
-                    /* if (popup.classList.contains('dnone')) popup.classList.remove('dnone');
-                    else popup.classList.add('dnone'); */
+                    document.querySelector('#cart_container .popup').classList.add('dnone');
+                    const popup = e.target.closest('.popup_container').querySelector('.popup');
+                    if (popup.classList.contains('dnone')) popup.classList.remove('dnone');
+                    else popup.classList.add('dnone');
                 }}
             >
                 <span className="btn-txt">Wish List</span>
@@ -28,7 +30,46 @@ export default function WishList({ products, bookmarkList }) {
                   products && products.length > 0 && bookmarkList && bookmarkList.length > 0 && products.filter((product) => {
                         return bookmarkList.includes(product.id.toString());
                     }).map((bookmarkedProduct) => {
-                        return <li key={bookmarkedProduct.id}>{bookmarkedProduct.id}</li>
+                        return (
+                            <li key={bookmarkedProduct.id}>
+                                <div className="card" product_id={bookmarkedProduct.id}>
+                                    <div className="product_thumbnail">
+                                        <img className="card-img-top" src={bookmarkedProduct.thumbnail} alt="Card cap" />
+                                    </div>
+                                    <div className="card-body">
+                                        <div className="product-info">
+                                        <h5 className="card-title">{bookmarkedProduct.title}</h5>
+                                        <div className="product_rating">
+                                            <span className="title">Rating: </span>
+                                            <span className="rating_value">{bookmarkedProduct.rating}</span>
+                                            <div className="rating_block">
+                                            <div className="rating_progress"></div>
+                                            </div>
+                                        </div>
+                                        <div className="product_price_section">
+                                            <div className="product_price">
+                                            <span className="currency">
+                                                <img src="/static/media/ruppee.e9ea7d608dd236a7bf9cdaddcd305ae7.svg" alt="ruppee currency symbol" />
+                                            </span>
+                                            <span className="price">{bookmarkedProduct.price}</span>
+                                            </div>
+                                            <div className="orignal_price">
+                                            <span className="price">{bookmarkedProduct.price}</span>
+                                            </div>
+                                        </div>
+                                        <div className="product_stock">
+                                            <span className="title"> In stock: </span>
+                                            <span className="value stock_value">{bookmarkedProduct.stock}</span>
+                                        </div>
+                                        </div>
+                                        <div className="action_buttons">
+                                        <button type="button" className="btn btn-danger remove_btn">Remove</button>
+                                        <button type="button" className="btn btn-primary buy_now">Buy Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        );
                     })
                 }
             </ul>

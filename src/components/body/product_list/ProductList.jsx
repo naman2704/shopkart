@@ -17,13 +17,12 @@ export default function ProductList({ products, bookmarkList, categoryList, book
                     products.map(product => {
                         const ratingPercentage = ((product.rating/5) * 100).toFixed(2);
                         const orignalPrice = Number.parseInt((product.price * 100)/(100 - product.discountPercentage));
-                        const bookmarked = bookmarkList?.includes(product?.id?.toString())? "true" : "false";
                         return (
                             <div 
                                 className="card" 
                                 key={product.id} 
                                 product_id={product.id} 
-                                bookmarked={bookmarked}
+                                bookmarked={bookmarkList?.includes(product?.id?.toString())? 'true': 'false'}
                             >
                             <div className="product_thumbnail">
                                 <img className="card-img-top" src={product.thumbnail} alt="Card cap" />
