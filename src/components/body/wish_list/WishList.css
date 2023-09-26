@@ -35,6 +35,11 @@
 #widh_list .card .product-info .card-title {
     text-align: left;
     font-size: 24px;
+    height: 26px;
+    width: 260px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 #widh_list .card .product_rating {

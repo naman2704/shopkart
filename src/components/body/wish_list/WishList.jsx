@@ -38,7 +38,7 @@ export default function WishList({ products, bookmarkList }) {
                                     </div>
                                     <div className="card-body">
                                         <div className="product-info">
-                                        <h5 className="card-title">{bookmarkedProduct.title}</h5>
+                                        <h5 className="card-title" title={bookmarkedProduct.title}>{bookmarkedProduct.title}</h5>
                                         <div className="product_rating">
                                             <span className="title">Rating: </span>
                                             <span className="rating_value">{bookmarkedProduct.rating}</span>
