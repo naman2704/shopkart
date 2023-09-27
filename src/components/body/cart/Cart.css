@@ -1,3 +1,134 @@
 #cart_container .popup {
+    position: absolute;
     right: 5px;
+    background: #dee2e67a;
+    width: 500px;
+    z-index: 10;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: fit-content;
+    max-height: 80vh;
+    overflow: hidden auto;
+}
+#cart_container li {
+    margin: 5px;
+ }
+#cart_container .card {
+    border-radius: 0;
+    background: #b4b3b378;
+    display: flex;
+    flex-direction: row;
+    height: 190px;
+}
+
+#cart_container .card .title {
+    font-size: 19px;
+    font-weight: 550;
+    margin-right: 5px;
+}
+
+#cart_container .card .product_thumbnail {
+    width: 40%;
+}
+
+#cart_container .card .card-img-top {
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#cart_container .card .product-info .card-title {
+    text-align: left;
+    font-size: 24px;
+    height: 26px;
+    width: 260px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#cart_container .card .product_rating {
+    width: 100%;
+    text-align: left;
+}
+
+#cart_container .card .rating_value {
+    font-size: 18px;
+}
+
+#cart_container .card .rating_block {
+    background: rgb(90, 90, 90, 0.5);
+    height: 12px;
+    padding: 2px;
+    display: inline-block;
+    width: 40%;
+    margin-left: 10px;
+}
+
+#cart_container .card .rating_progress {
+    width: 50%;
+    background: #8cd7fd;
+    height: 100%;
+}
+
+#cart_container .card .product_price_section {
+    width: fit-content;
+    display: flex;
+    margin-top: 5px;
+}
+
+#cart_container .card .product_price_section>div {
+    margin: 5px 5px 5px 0;
+}
+
+#cart_container .card .product_price_section .price {
+    font-weight: 500;
+}
+
+#cart_container .card .product_price_section .orignal_price {
+    margin: 0;
+}
+
+#cart_container .card .product_price_section .orignal_price .price {
+    font-weight: 500;
+    text-decoration: line-through;
+    font-size: 22px;
+    line-height: 1.4;
+}
+
+#cart_container .card .product_stock {
+    margin-right: 5px;
+    float: left;
+}
+
+#cart_container .card .discount_percent {
+    float: right;
+}
+
+#cart_container .card .discount_percent .discount {
+    font-size: 22px;
+    color: #a70f0f;
+    font-weight: 500;
+    line-height: 1;
+}
+
+#cart_container .card .action_buttons {
+    margin-top: 7px;
+}
+
+#cart_container .card .remove_btn, #cart_container .card .buy_now {
+    width: 33%;
+    padding: 2px;
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+#cart_container .card .remove_btn {
+    float: left;    
+}
+
+#cart_container .card .buy_now {
+    float: right;
 }
