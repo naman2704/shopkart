@@ -4,9 +4,11 @@ import Header from '../body/header/Header';
 import FilterProductsForm from "./filter_products_form/FilterProductsForm";
 import ProductList from '../body/product_list/ProductList';
 
-import { useState/* , useEffect */ } from "react";
+import { useEffect, useState/* , useEffect */ } from "react";
 import WishList from '../body/wish_list/WishList';
 import Cart from '../body/cart/Cart';
+
+import axios from 'axios';
 
 /* import bg1 from '../body/img/formBG1.avif';
 import bg2 from '../body/img/formBG2.avif';
@@ -15,24 +17,54 @@ import bg4 from '../body/img/formBG4.avif';
 const images = [bg1, bg2, bg3, bg4]; */
 
 export default function Body() {
-    const data = JSON.parse(localStorage.getItem('bookmarkedProducts')) || [];
-    const SHOPKART_PRODUCTS = PRODUCT_DATA.products;
+    let productsData = [];
+    let SHOPKART_PRODUCTS = [];
+    let categoryList = [];
+    useEffect(() => {
+        axios.get('https://dummyjson.com/products')
+            .then((response) => {
+                // handle success
+                return response.data;
+            })
+            .then((data) => {
+                return data?.products;
+            })
+            .then ((products) => {
+                console.log(products);
+                productsData = products;
+                SHOPKART_PRODUCTS = productsData;
+                setProducts(productsData);
+                Object.values(SHOPKART_PRODUCTS).forEach(product => {
+                    const category = product.category.toLowerCase().trim();
+                    if (!categoryList.includes(category))
+                        categoryList.push(category);
+                });
+                // productsData = JSON.parse();
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+                productsData = PRODUCT_DATA.products;
+                SHOPKART_PRODUCTS = productsData;
+                setProducts(productsData);
+                Object.values(SHOPKART_PRODUCTS).forEach(product => {
+                    const category = product.category.toLowerCase().trim();
+                    if (!categoryList.includes(category))
+                        categoryList.push(category);
+                });
+            })
+    }, []);
+    const bookmarkData = JSON.parse(localStorage.getItem('bookmarkedProducts')) || [];
+    const cartData = JSON.parse(localStorage.getItem('cartProducts')) || [];
     const [products, setProducts] = useState(SHOPKART_PRODUCTS);
-    const [bookmarkList, setBookmarkList] = useState(data);
-    const categoryList = [];
-    Object.values(SHOPKART_PRODUCTS).forEach(product => {
-        const category = product.category.toLowerCase().trim();
-        if (!categoryList.includes(category))
-            categoryList.push(category);
-    });
+    const [bookmarkList, setBookmarkList] = useState(bookmarkData);
+    const [cartList, setCartList] = useState(cartData);
     const [category, setCategory] = useState('all');
     const bookmarkClickHandler = (event) => {
         const bookmarkList1 = [...bookmarkList];
         const productId = event.target.closest('.card').getAttribute('product_id');
         if (productId && typeof productId === "string") {
-            console.log("Type of bookmarkList: ", typeof bookmarkList1);
             if (bookmarkList1.includes(productId)) {
-                console.log(typeof bookmarkList1);
                 bookmarkList1.splice(bookmarkList1.indexOf(productId), 1);
                 event.target.closest('.card').setAttribute('bookmarked', 'false');
             } else {
@@ -43,9 +75,23 @@ export default function Body() {
             localStorage.setItem('bookmarkedProducts', JSON.stringify(bookmarkList1));
         } 
     }
+    const addToCartClickHandler = (event) => {
+        const cartList1 = [...cartList];
+        const productId = event.target.closest('.card').getAttribute('product_id');
+        if (productId && typeof productId === "string") {
+            if (!cartList1.includes(productId)) {
+                cartList1.push(productId);
+                event.target.closest('.card').setAttribute('insideCart', 'true');
+                event.target.textContent = "View In Cart";
+                localStorage.setItem('cartProducts', JSON.stringify(cartList1));
+                setCartList(cartList1);
+            } else {
+                document.getElementById('cart')?.classList.remove('dnone')
+            }
+        } 
+    }
     const productCategoryClickHandler = (event) => {
         const target_category = event.target?.dataset?.category.trim();
-        console.log(target_category);
         if (target_category && typeof target_category === 'string' && target_category !== "") {
             document.querySelector(".category_filter_list li[active='true']")?.setAttribute('active', 'false');
             setCategory(target_category);
@@ -62,9 +108,30 @@ export default function Body() {
             }
         }
     }
+    const removeProductFromWishList = (e) => {
+        const productId = e.target.closest('.card')?.getAttribute('product_id').trim();
+        if (productId) {
+            const bookmarkList1 = [...bookmarkList];   
+            if (bookmarkList1.length > 0 && bookmarkList1.includes(productId)) {
+                bookmarkList1.splice(bookmarkList1.indexOf(productId), 1);
+                setBookmarkList(bookmarkList1);
+                localStorage.setItem('bookmarkedProducts', JSON.stringify(bookmarkList1));  
+            }
+        }                                              
+    }
+    const removeProductFromCartList = (e) => {
+        const productId = e.target.closest('.card')?.getAttribute('product_id').trim();
+        if (productId) {
+            const cartList1 = [...cartList];   
+            if (cartList1.length > 0 && cartList1.includes(productId)) {
+                cartList1.splice(cartList1.indexOf(productId), 1);
+                setCartList(cartList1);
+                localStorage.setItem('cartProducts', JSON.stringify(cartList1));  
+            }
+        }                                              
+    }
     /* const [index, setIndex] = useState(1);
     useEffect(() => {
-        console.log('PRODUCT_DATA: ', PRODUCT_DATA);
         const updateImageInterval = setInterval(() => {
             const element = document.querySelector('div#body');
             element.style.backgroundImage = `url('${images[index]}')`;
@@ -80,17 +147,24 @@ export default function Body() {
             />
             <div className="button_list" id="saved_items">
                 <WishList 
-                    products={products}
+                    products={SHOPKART_PRODUCTS}
                     bookmarkList={bookmarkList} 
+                    removeProductClickHandler={removeProductFromWishList}
                 />
-                <Cart />
+                <Cart 
+                    products={SHOPKART_PRODUCTS}
+                    cartList = {cartList}
+                    removeProductClickHandler={removeProductFromCartList}
+                />
             </div>
             <FilterProductsForm />
             <ProductList 
                 products={products} 
                 bookmarkList={bookmarkList} 
                 categoryList={categoryList}
+                cartList = {cartList}
                 bookmarkClickHandler={bookmarkClickHandler}
+                addToCartClickHandler={addToCartClickHandler}
                 categoryClickHandler={productCategoryClickHandler}
             />
         </div>

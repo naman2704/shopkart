@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
 import './Cart.css';
 
-export default function Cart() {
+export default function Cart({ products, cartList, removeProductClickHandler }) {
+    /* useEffect(() => {
+    }, [cartList]) */
     return (
         <div id="cart_container" className="popup_container">
             <button 
@@ -38,7 +41,68 @@ export default function Cart() {
                 </div>
             </button>
             <ul id="cart" className="dnone popup">
-                <p>Your cart is empty</p>
+            {
+                    (products && products.length > 0 && cartList && cartList.length > 0)? 
+                        products.filter((product) => {
+                            return cartList.includes(product.id.toString());
+                        }).map((cartProduct) => {
+                            const ratingPercentage = ((cartProduct.rating/5) * 100).toFixed(2);
+                            const orignalPrice = Number.parseInt((cartProduct.price * 100)/(100 - cartProduct.discountPercentage));
+                            return (
+                                <li key={cartProduct.id}>
+                                    <div className="card" product_id={cartProduct.id}>
+                                        <div className="product_thumbnail">
+                                            <img className="card-img-top" src={cartProduct.thumbnail} alt="Card cap" />
+                                        </div>
+                                        <div className="card-body">
+                                            <div className="product-info">
+                                            <h5 className="card-title" title={cartProduct.title}>{cartProduct.title}</h5>
+                                            <div className="product_rating">
+                                                <span className="title">Rating: </span>
+                                                <span className="rating_value">{cartProduct.rating}</span>
+                                                <div className="rating_block">
+                                                <div className="rating_progress" style={{
+                                                    width: `${ratingPercentage}%`
+                                                }}></div>
+                                                </div>
+                                            </div>
+                                            <div className="product_price_section">
+                                                <span className="title">Price: </span>
+                                                <div className="product_price">
+                                                    <span className="currency">
+                                                        <img src="/static/media/ruppee.e9ea7d608dd236a7bf9cdaddcd305ae7.svg" alt="ruppee currency symbol" />
+                                                    </span>
+                                                    <span className="price">{cartProduct.price}</span>
+                                                </div>
+                                                <div className="orignal_price">
+                                                    <span className="price">{orignalPrice}</span>
+                                                </div>
+                                            </div>
+                                            <div className='clearfix'>
+                                                <div className="product_stock">
+                                                        <span className="title"> In stock: </span>
+                                                        <span className="value stock_value">{cartProduct.stock}</span>
+                                                    </div>
+                                                    <div className="discount_percent">
+                                                        <span className="discount">{cartProduct.discountPercentage}% off</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="action_buttons clearfix">
+                                                <button 
+                                                    type="button" 
+                                                    className="btn btn-danger remove_btn"
+                                                    onClick={removeProductClickHandler}
+                                                > Remove
+                                                </button>
+                                                <button type="button" className="btn btn-primary buy_now">Buy Now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            );
+                        }): <p>No items found in wish list.</p>
+                }
             </ul>
         </div>
     );

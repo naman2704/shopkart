@@ -2,6 +2,9 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    height: fit-content;
+    max-height: 80vh;
+    overflow: hidden auto;
 }
 
 .popup {
@@ -20,6 +23,13 @@
     background: #b4b3b378;
     display: flex;
     flex-direction: row;
+    height: 190px;
+}
+
+#widh_list .card .title {
+    font-size: 19px;
+    font-weight: 550;
+    margin-right: 5px;
 }
 
 #widh_list .card .product_thumbnail {
@@ -43,18 +53,86 @@
 }
 
 #widh_list .card .product_rating {
-    width: fit-content;
+    width: 100%;
+    text-align: left;
+}
+
+#widh_list .card .rating_value {
+    font-size: 18px;
+}
+
+#widh_list .card .rating_block {
+    background: rgb(90, 90, 90, 0.5);
+    height: 12px;
+    padding: 2px;
+    display: inline-block;
+    width: 40%;
+    margin-left: 10px;
+}
+
+#widh_list .card .rating_progress {
+    width: 50%;
+    background: #8cd7fd;
+    height: 100%;
 }
 
 #widh_list .card .product_price_section {
     width: fit-content;
     display: flex;
+    margin-top: 5px;
 }
 
 #widh_list .card .product_price_section>div {
     margin: 5px 5px 5px 0;
 }
 
+#widh_list .card .product_price_section .price {
+    font-weight: 500;
+}
+
+#widh_list .card .product_price_section .orignal_price {
+    margin: 0;
+}
+
+#widh_list .card .product_price_section .orignal_price .price {
+    font-weight: 500;
+    text-decoration: line-through;
+    font-size: 22px;
+    line-height: 1.4;
+}
+
 #widh_list .card .product_stock {
-    width: fit-content; 
+    margin-right: 5px;
+    float: left;
+}
+
+#widh_list .card .discount_percent {
+    float: right;
+}
+
+#widh_list .card .discount_percent .discount {
+    font-size: 22px;
+    color: #a70f0f;
+    font-weight: 500;
+    line-height: 1;
+}
+
+#widh_list .card .action_buttons {
+    margin-top: 7px;
+}
+
+#widh_list .card .remove_btn, #widh_list .card .buy_now {
+    width: 33%;
+    padding: 2px;
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+#widh_list .card .remove_btn {
+    float: left;    
+}
+
+#widh_list .card .buy_now {
+    float: right;
 }

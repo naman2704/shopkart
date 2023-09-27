@@ -1,0 +1,17 @@
+#pagination {
+    display: flex;
+    margin: 10px auto;
+    justify-content: space-between;
+}
+#pagination .pagination_info {
+    line-height: 2.7;
+    font-size: 16px;
+    font-weight: 600;
+}
+#pagination button {
+    background: #444345bd;
+    border-color: #444345bd;
+    width:130px;
+    padding: 0;
+    font-size: 18px;
+}

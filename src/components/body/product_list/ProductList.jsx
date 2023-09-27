@@ -1,7 +1,17 @@
+
+import Pagination from "../pagination/Pagination";
 import './ProductList.css';
 import ruppeeSvg from '../img/ruppee.svg';
 
-export default function ProductList({ products, bookmarkList, categoryList, bookmarkClickHandler, categoryClickHandler }) {
+export default function ProductList({ 
+    products, 
+    bookmarkList, 
+    categoryList, 
+    cartList,
+    bookmarkClickHandler, 
+    addToCartClickHandler, 
+    categoryClickHandler 
+}) {
     return (
         <div id="product_list">
             <div id="category_filter">
@@ -12,6 +22,9 @@ export default function ProductList({ products, bookmarkList, categoryList, book
                     })}
                 </ul>
             </div>
+            <Pagination 
+                products={products}
+            />
             <div className="products">
                 {
                     products.map(product => {
@@ -76,7 +89,12 @@ export default function ProductList({ products, bookmarkList, categoryList, book
                                         <span className="price">{orignalPrice}</span>        
                                         </div>
                                     </div>
-                                    <a href="/" className="btn btn-primary">Add to Cart</a>
+                                    <button 
+                                        className="btn btn-primary"
+                                        onClick={addToCartClickHandler}
+                                    >
+                                        {cartList?.includes(product?.id?.toString())? 'View in Cart': 'Add to Cart'}
+                                    </button>
                                 </div>
                                 <div className="product_stock">
                                     <span className="title"> In stock: </span>
