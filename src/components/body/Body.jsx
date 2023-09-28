@@ -17,9 +17,14 @@ import bg4 from '../body/img/formBG4.avif';
 const images = [bg1, bg2, bg3, bg4]; */
 
 export default function Body() {
-    let productsData = [];
     let SHOPKART_PRODUCTS = [];
-    let categoryList = [];
+    const [products, setProducts] = useState([]);
+    const bookmarkData = JSON.parse(localStorage.getItem('bookmarkedProducts')) || [];
+    const cartData = JSON.parse(localStorage.getItem('cartProducts')) || [];
+    const [bookmarkList, setBookmarkList] = useState(bookmarkData);
+    const [cartList, setCartList] = useState(cartData);
+    const [category, setCategory] = useState('all');
+    const [categoryList, setCategoryList] = useState([]);
     useEffect(() => {
         axios.get('https://dummyjson.com/products')
             .then((response) => {
@@ -30,36 +35,49 @@ export default function Body() {
                 return data?.products;
             })
             .then ((products) => {
-                console.log(products);
-                productsData = products;
-                SHOPKART_PRODUCTS = productsData;
-                setProducts(productsData);
+                SHOPKART_PRODUCTS = products;
+                setProducts(SHOPKART_PRODUCTS);
+                const categoryList = [];
                 Object.values(SHOPKART_PRODUCTS).forEach(product => {
                     const category = product.category.toLowerCase().trim();
                     if (!categoryList.includes(category))
                         categoryList.push(category);
                 });
-                // productsData = JSON.parse();
+                setCategoryList(categoryList);
             })
             .catch(function (error) {
                 // handle error
                 console.log(error);
-                productsData = PRODUCT_DATA.products;
+                /* productsData = PRODUCT_DATA.products;
                 SHOPKART_PRODUCTS = productsData;
                 setProducts(productsData);
                 Object.values(SHOPKART_PRODUCTS).forEach(product => {
                     const category = product.category.toLowerCase().trim();
                     if (!categoryList.includes(category))
                         categoryList.push(category);
-                });
+                }); */
             })
     }, []);
-    const bookmarkData = JSON.parse(localStorage.getItem('bookmarkedProducts')) || [];
-    const cartData = JSON.parse(localStorage.getItem('cartProducts')) || [];
-    const [products, setProducts] = useState(SHOPKART_PRODUCTS);
-    const [bookmarkList, setBookmarkList] = useState(bookmarkData);
-    const [cartList, setCartList] = useState(cartData);
-    const [category, setCategory] = useState('all');
+    
+    const productCategoryClickHandler = (event) => {
+        const target_category = event.target?.dataset?.category.trim();
+        if (target_category && typeof target_category === 'string' && target_category !== "") {
+            document.querySelector(".category_filter_list li[active='true']")?.setAttribute('active', 'false');
+            setCategory(target_category);
+            event.target.setAttribute('active', 'true');
+            let shopKartProducts = [...SHOPKART_PRODUCTS];
+            console.log("All Products: ", shopKartProducts)
+            if (target_category === 'all') {
+                setProducts(shopKartProducts);
+            }
+            else {
+                shopKartProducts = shopKartProducts.filter(product => {
+                    return product.category.trim() === target_category;
+                });
+                setProducts(shopKartProducts);
+            }
+        }
+    }
     const bookmarkClickHandler = (event) => {
         const bookmarkList1 = [...bookmarkList];
         const productId = event.target.closest('.card').getAttribute('product_id');
@@ -89,24 +107,6 @@ export default function Body() {
                 document.getElementById('cart')?.classList.remove('dnone')
             }
         } 
-    }
-    const productCategoryClickHandler = (event) => {
-        const target_category = event.target?.dataset?.category.trim();
-        if (target_category && typeof target_category === 'string' && target_category !== "") {
-            document.querySelector(".category_filter_list li[active='true']")?.setAttribute('active', 'false');
-            setCategory(target_category);
-            event.target.setAttribute('active', 'true');
-            let shopKartProducts = [...SHOPKART_PRODUCTS];
-            if (target_category === 'all') {
-                setProducts(shopKartProducts);
-            }
-            else {
-                shopKartProducts = shopKartProducts.filter(product => {
-                    return product.category.trim() === target_category;
-                });
-                setProducts(shopKartProducts);
-            }
-        }
     }
     const removeProductFromWishList = (e) => {
         const productId = e.target.closest('.card')?.getAttribute('product_id').trim();
